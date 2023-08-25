@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar o Repositório') {
+            steps {
+                git branch: 'main', url: 'https://github.com/nsRodrigo/teste-api-cypress'
+            }
+        }
+        stage('Instalar das dependencias') {
+            steps {
+                bat 'npm install'
+                bat 'npm install cypress'
+                bat 'npm install concurrently'
+            }
+        }
+        stage('Execução dos testes') {
+            steps {
+                bat 'npm run test'
+            }
+        }
+    }
+}
